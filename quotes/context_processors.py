@@ -6,5 +6,4 @@ def get_quote(request):
         quote = Quote.get_random()
         if quote:
             return {'quote': quote.text, 'quote_prof': quote.prof}
-        else:
-            return {'quote': None}
+    return {'quote': None}

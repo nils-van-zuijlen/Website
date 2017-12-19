@@ -76,7 +76,7 @@ def del_prof(request, pid):
     prof.delete()
     return redirect('quotes:manage_prof')
 
-@permission_required('profs.manage_prof')
+@permission_required('quotes.manage_prof')
 def approve_prof(request, pid):
     prof = get_object_or_404(Prof, id=pid)
     prof.approved = True

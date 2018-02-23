@@ -57,6 +57,7 @@ INSTALLED_APPS = (
     'quotes',
     'asso',
     'partnerships',
+    'killer',
 )
 
 

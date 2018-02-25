@@ -1,0 +1,57 @@
+{% load payment %}
+
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Acheteur</th>
+            <th>Date</th>
+            <th>Moyen de paiement</th>
+            <th>Prix</th>
+            <th>Type</th>
+            <th>Vendeur</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in history %}
+            <tr>
+                {% if item.type == 'pack' %}
+                    <td>{{ item.pack.name }}</td>
+                {% else %}
+                    <td>{{ item.product.name }}</td>
+                {% endif %}
+
+                <td>{{ item.user.profile }}</td>
+                <td>{{ item.date }}</td>
+                <td>{{ item.payment_mean|payment_mean }}</td>
+
+                {% if item.type == 'pack' %}
+                    <td>{{ item.pack.price }} €</td>
+                    <td>Pack</td>
+                {% else %}
+                    <td>{{ item.product.price }} €</td>
+                    <td>Produit</td>
+                {% endif %}
+
+                {% if item.seller %}
+                    <td>{{ item.seller.profile }}</td>
+                {% else %}
+                    <td>n/d</td>
+                {% endif %}
+                <td>
+                    <a href="{% url 'shop:history_detail' hid=item.pk %}" onclick="showDetails(this);return false;" ><i class="fa fa-list-alt"></i></a>
+                    {% if perms.shop.delete_buyinghistory and admin %}
+                        <a href="{% url 'shop:history_delete' hid=item.id %}"><i class="fa fa-trash-o red"></i></a>
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<script>
+    function showDetails(element){
+        var popup = new RemoteHtmlPopup("Détail de l'achat", element.href);
+        popup.pop();
+    }
+</script>

@@ -24,61 +24,11 @@
 
 {% block main %}
     {% if history %}
-        <table>
-            <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Acheteur</th>
-                    <th>Date</th>
-                    <th>prix</th>
-                    <th>Moyen de paiement</th>
-                    <th>Type</th>
-                    <th>Vendeur</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in history %}
-                    <tr>
-                        {% if item.type == 'pack' %}
-                            <td>{{ item.pack.name }}</td>
-                        {% else %}
-                            <td>{{ item.product.name }}</td>
-                        {% endif %}
-
-                        <td>{{ item.user.profile }}</td>
-                        <td>{{ item.date }}</td>
-                        <td>{{ item.payment_mean }}</td>
-
-                        {% if item.type == 'pack' %}
-                            <td>{{ item.pack.price }} €</td>
-                            <td>Pack</td>
-                        {% else %}
-                            <td>{{ item.product.price }} €</td>
-                            <td>Produit</td>
-                        {% endif %}
-
-                        {% if item.seller %}
-                            <td>{{ item.seller.profile }}</td>
-                        {% else %}
-                            <td>n/d</td>
-                        {% endif %}
-                        <td class="action_cell"><a href="{% url 'shop:history_detail' hid=item.pk %}" onclick="showDetails(this);return false;" ><i class="fa fa-list-alt"></i></a></td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% include "shop/history_table.html" with admin=False %}
     {% else %}
         <p>
             Vous n'avez rien acheté.
         </p>
     {% endif %}
-    <script>
-        function showDetails(element){
-            var popup = new RemoteHtmlPopup("Détail de l'achat", element.href);
-            popup.pop();
-        }
-    </script>
-
 
 {% endblock %}

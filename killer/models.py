@@ -19,6 +19,9 @@ class Killer(models.Model):
     def is_registration_ended(self):
         return timezone.now() >= self.registration_end_date
 
+    def is_creation_in_progress(self):
+        return self.registration_end_date <= timezone.now() <= self.game_start_date
+
     def is_game_open(self):
         return self.game_start_date <= timezone.now() <= self.game_end_date
 

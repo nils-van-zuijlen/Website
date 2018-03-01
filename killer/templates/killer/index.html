@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load menu_item %}
+{% load game_status %}
 
 {% block styles %}
 {% endblock %}
@@ -22,5 +23,26 @@
 {% endblock %}
 
 {% block main %}
-<p>Killer</p>
+<div id="killerlist">
+	<ul class="userlist">
+		{% for game in history %}
+			<li class="undefined">
+				<div class="icon_container"><i class="fa fa-user-secret"></i></div>
+				<div>
+					<span class="bold">
+						Killer du {{ game.game_start_date }} au {{ game.game_end_date }}
+					</span>
+				</div>
+				<div>
+					{{ game|game_status }}
+				</div>
+				<div class="action_container">
+					<button type="button" href="{% url 'killer:view' pk=game.id %}" onclick="window.location=this.getAttribute('href')"">Détails</button>
+				</div>
+			</li>
+		{% empty %}
+			<li>Il n'y a pas encore de killer enregistré</li>
+		{% endfor %}
+	</ul>
+</div>
 {% endblock %}

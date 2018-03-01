@@ -42,4 +42,5 @@ urlpatterns = [
     url('^quotes/', include('quotes.urls', namespace='quotes')),
     url('^asso/', include('asso.urls', namespace='asso')),
     url('^partnerships/', include('partnerships.urls', namespace='partnerships')),
+    url('^killer/', include('killer.urls', namespace='killer'))
 ]

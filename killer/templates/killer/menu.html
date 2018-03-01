@@ -1,0 +1,7 @@
+{% load static %}
+{% load menu_item %}
+
+{% menu_item 'Historique' 'killer:index' %}
+{% if perms.killer.manage_game %}
+    {% menu_item 'Administration' 'killer:admin' %}
+{% endif %}

@@ -18,9 +18,64 @@
 {% endblock %}
 
 {% block menu %}
-	{% include 'killer/menu.html' %}
+    {% include 'killer/menu.html' %}
 {% endblock %}
 
 {% block main %}
-<p>Killer n°{{ pk }}</p>
+    <header><h1>Killer du {{ game.game_start_date }} au {{ game.game_end_date }}</h1></header>
+
+    {% if game.is_registration_open %}
+        {# Subscribe to the game #}
+        <header>
+            <h2>Inscris toi</h2>
+        </header>
+        <button id="killer_subscribe">S'inscrire</button>
+    {% elif game.is_creation_in_progress %}
+        {# Please wait and come back later #}
+        <header>
+            <h2>Les missions sont en cours d'attribution, reviens plus tard</h2>
+        </header>
+    {% elif game.is_game_open or game.is_game_ended %}
+        {# Follow who has been killed, who's alive #}
+        <header>
+            <h2>Vivants</h2>
+        </header>
+        <ul>
+            {% for player in alive %}
+                <li>{{ player.user.profile }}</li>
+            {% empty %}
+                <li>Tout le monde est mort</li>
+            {% endfor %}
+        </ul>
+
+        <header>
+            <h2>Morts</h2>
+        </header>
+        <table>
+            <thead>
+                <tr>
+                    <th>Mort</th>
+                    <th>Tueur</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in dead %}
+                    <tr>
+                        <td>{{ player.user.profile }}</td>
+                        <td>{{ player.killed_by.user.profile }}</td>
+                        <td>{{ player.killed_by.action }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Personne n'est mort pour l'instant</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        {% if game.is_game_open %}
+            {# Declare your kills #}
+        {% endif %}
+    {% endif %}
 {% endblock %}

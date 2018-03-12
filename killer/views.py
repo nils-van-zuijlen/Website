@@ -14,8 +14,14 @@ def index(request):
     return render(request, "killer/index.html", context)
 
 def view(request, pk):
+    game = Killer.objects.filter(registration_start_date__lte=timezone.now()).get(id=pk)
+    players = Participant.objects.filter(game__id=pk).select_related("user__profile")
+
     context = {
-        "pk": pk,
+        "game": game,
+        "players": players,
+        "alive": players.filter(dead=False),
+        "dead": players.filter(dead=True),
     }
 
     return render(request, "killer/view.html", context)

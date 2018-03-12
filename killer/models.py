@@ -31,7 +31,7 @@ class Killer(models.Model):
 class Participant(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        related_name='participating_killers'
+        related_name='players'
         )
     game = models.ForeignKey(Killer)
     killing = models.OneToOneField(
@@ -42,6 +42,7 @@ class Participant(models.Model):
         related_name='killed_by'
         )
     dead = models.BooleanField(default=False)
+    action = models.TextField(null=True)
 
     def is_alive(self):
         return not self.dead

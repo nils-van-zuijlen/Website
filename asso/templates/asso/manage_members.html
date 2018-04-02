@@ -12,7 +12,7 @@
     {% menu_item 'Liste des associations' 'asso:index' %}
     {% menu_item 'Retour à la présentation' 'asso:details' aid=asso.pk %}
     {% if user_is_admin %}
-        {% menu_item 'Gestion des members' 'asso:manage_members' aid=asso.pk %}
+        {% menu_item 'Gestion des membres' 'asso:manage_members' aid=asso.pk %}
         {% menu_item 'Editer' 'asso:edit' aid=asso.pk %}
     {% endif %}
 {% endblock %}

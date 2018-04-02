@@ -20,7 +20,7 @@ class ProductForm(forms.ModelForm):
             'price': 'Prix',
             'description': 'Description',
             'action': 'Action additionelle',
-            'event': 'Inscription à l\'evenement',
+            'event': 'Inscription à l\'événement',
         }
 
 

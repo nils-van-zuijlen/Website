@@ -21,14 +21,14 @@
 {% endblock %}
 
 {% block header %}
-    Evenement
+    Événement
 {% endblock %}
 
 {% block menu %}
     {% if perms.events %}
-        {% menu_item "Liste des évènements" "events:admin_index" %}
+        {% menu_item "Liste des événements" "events:admin_index" %}
     {% else %}
-        {% menu_item "Liste des évènements" "events:index" %}
+        {% menu_item "Liste des événements" "events:index" %}
     {% endif %}
 
     {% menu_item "Description" "events:event" eid=event.id %}
@@ -39,7 +39,7 @@
     {% endif %}
 
     {% if perms.events.manage_event %}
-        {% menu_item "Editer l'évènement" "events:admin_edit" eid=event.id %}
+        {% menu_item "Editer l'événement" "events:admin_edit" eid=event.id %}
     {% endif %}
     {% if event.gestion and perms.events.manage_entries %}
         {% menu_item "Gestion" "events:admin_management" eid=event.id %}

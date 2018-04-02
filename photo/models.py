@@ -49,7 +49,7 @@ class PublicAccess(AccessPolicy):
         return True
 
     def __str__(self):
-        return "Tous le monde peut voir l'album"
+        return "Tout le monde peut voir l'album"
 
 
 class GroupAccess(AccessPolicy):

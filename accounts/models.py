@@ -39,7 +39,7 @@ class Profile(models.Model):
 
     def __str__(self):
         if self.user.first_name and self.user.last_name and self.user.profile.nickname:
-            display_name_tpl = "{first_name} « {nickname} » {last_name}"
+            display_name_tpl = "{first_name} « {nickname} » {last_name}"
         elif self.user.first_name and self.user.last_name:
             display_name_tpl = "{first_name} {last_name}"
         elif self.user.profile.nickname:
